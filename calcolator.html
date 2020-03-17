@@ -62,7 +62,7 @@
   </style>
 </head>
 
-<body>
+<body >
   <div id="monitor" class="monitor" >0</div>
   <input type="button" value="1" class="numbutton" onclick="cal('1')" >
   <input type="button" value="2" class="numbutton" onclick="cal('2')" >
@@ -84,23 +84,17 @@
     let num = "";
     let opr = "";
     let lastInput = "";
-
-    document.body.addEventListener("keydown", (event) => {
-        console.log(event);
-        return true;
-      });
-
-    function uniKeyCode(event){
-      var char =event.which || event.keyCode;
-      switch (char){
-        case '49':
-         cal(1);
-         break;
+    document.body.addEventListener("keydown", (event)=>{
+      console.log(event);
+      if (event.key === 'Backspace') {
+        // handle backspace
+      } else if ('1234567890-+=/*'.indexOf(event.key) >= 0) {
+        cal(event.key);
       }
+    return true; // cancels this function only
+});
 
-
-    }
-
+   
     function cal(x) {
       
         if (lastInput !== "" && isNaN(lastInput) && isNaN(x) && x!== '=') {
