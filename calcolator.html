@@ -62,7 +62,7 @@
   </style>
 </head>
 
-<body  onkeypress="uniKeyCode(event)">
+<body>
   <div id="monitor" class="monitor" >0</div>
   <input type="button" value="1" class="numbutton" onclick="cal('1')" >
   <input type="button" value="2" class="numbutton" onclick="cal('2')" >
@@ -84,6 +84,11 @@
     let num = "";
     let opr = "";
     let lastInput = "";
+
+    document.body.addEventListener("keydown", (event) => {
+        console.log(event);
+        return true;
+      });
 
     function uniKeyCode(event){
       var char =event.which || event.keyCode;
