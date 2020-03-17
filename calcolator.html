@@ -62,7 +62,7 @@
   </style>
 </head>
 
-<body  onkeypress="uniKeyCode(event)">
+<body >
   <div id="monitor" class="monitor" >0</div>
   <input type="button" value="1" class="numbutton" onclick="cal('1')" >
   <input type="button" value="2" class="numbutton" onclick="cal('2')" >
@@ -84,18 +84,63 @@
     let num = "";
     let opr = "";
     let lastInput = "";
-
-    function uniKeyCode(event){
-      var char =event.which || event.keyCode;
-      switch (char){
-        case '49':
-         cal(1);
+    document.body.addEventListener("keydown", (event)=>{
+      console.log(event);
+      switch(event.key){
+        case '1':
+         cal(1) ;
          break;
-      }
+        case '2':
+         cal(2) ;
+         break;
+        case '3':
+         cal(3) ;
+         break;
+        case '4':
+         cal(4) ;
+         break;
+        case '5':
+         cal(5) ;
+         break;
+        case '6':
+         cal(6) ;
+         break;
+        case '7':
+         cal(7) ;
+         break;
+        case '8':
+         cal(8) ;
+         break;
+        case '9':
+         cal(9) ;
+         break;
+        case '0':
+         cal(0) ;
+         break;
+        case '=':
+         cal('=') ;
+         break;
+        case '+':
+         cal('+') ;
+         break;
+        case '-':
+         cal('-') ;
+         break;
+        case '/':
+         cal('/') ;
+         break;
+        case 'x':
+         cal('x') ;
+         break;
+        case'Enter':
+         cal('=') ;
+         break;
 
+            }// do some stuff
+    return true; // cancels this function only
+});
 
-    }
-
+   
     function cal(x) {
       
         if (lastInput !== "" && isNaN(lastInput) && isNaN(x) && x!== '=') {
