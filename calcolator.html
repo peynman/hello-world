@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .numbutton {
+      background-color: rgb(106, 177, 243);
+      border: none;
+      border-radius: 25px;
+      color: white;
+      padding: 15px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 2px 2px;
+      cursor: pointer;
+    }
+
+    .button {
+      background-color: rgb(23, 233, 170);
+      border: none;
+      border-radius: 25px;
+      color: white;
+      padding: 15px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 2px 2px;
+      cursor: pointer;
+    }
+
+    .bigbutton {
+      background-color: rgb(23, 233, 170);
+      border: none;
+      border-radius: 25px;
+      color: white;
+      padding: 15px 47px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 2px 2px;
+      cursor: pointer;
+    }
+
+    .monitor {
+      background-color: rgb(53, 51, 75);
+      color: aliceblue;
+      width: 200px;
+      height: 20px;
+      border: 3px solid rgb(26, 46, 36);
+      border-radius: 25px;
+      padding: 5px;
+      margin: 4px;
+    }
+  </style>
+</head>
+
+<body  onkeypress="uniKeyCode(event)">
+  <div id="monitor" class="monitor" >0</div>
+  <input type="button" value="1" class="numbutton" onclick="cal('1')" >
+  <input type="button" value="2" class="numbutton" onclick="cal('2')" >
+  <input type="button" value="3" class="numbutton" onclick="cal('3')">
+  <input type="button" value="+" class="button" onclick="cal('+')"><br />
+  <input type="button" value="4" class="numbutton" onclick="cal('4')">
+  <input type="button" value="5" class="numbutton" onclick="cal('5')">
+  <input type="button" value="6" class="numbutton" onclick="cal('6')">
+  <input type="button" value="-" class="button" onclick="cal('-')"><br />
+  <input type="button" value="7" class="numbutton" onclick="cal('7')">
+  <input type="button" value="8" class="numbutton" onclick="cal('8')">
+  <input type="button" value="9" class="numbutton" onclick="cal('9')">  
+  <input type="button" value="x" class="button" onclick="cal('x')"><br />
+  <input type="button" value="0" class="numbutton" onclick="cal('0')">
+  <input type="button" value="=" class="bigbutton" onclick="cal('=')">
+  <input type="button" value="÷" class="button" onclick="cal('/')"><br />
+  <script>
+    let sum = 0;
+    let num = "";
+    let opr = "";
+    let lastInput = "";
+
+    function uniKeyCode(event){
+      var char =event.which || event.keyCode;
+      switch (char){
+        case '49':
+         cal(1);
+         break;
+      }
+
+
+    }
+
+    function cal(x) {
+      
+        if (lastInput !== "" && isNaN(lastInput) && isNaN(x) && x!== '=') {
+          
+          document.getElementById("monitor").innerHTML = num;
+          return;
+        }
+
+
+      if (lastInput !== "" && isNaN(lastInput) && !isNaN(x)) {
+        num = ""
+      }
+      if (!isNaN(x)) {
+        num += x;
+      }
+      else {
+        switch (opr) {
+          case '+':
+            sum += parseFloat(num);
+            console.log(num, parseFloat(num), sum, typeof sum, typeof num);
+            opr = x !== '=' ? x:opr;
+            num = sum;
+            console.log(num, parseFloat(num), sum, typeof sum, typeof num);
+            break;
+          case '-':
+            sum -= parseFloat(num);
+            opr = x !== '=' ? x:opr;
+            num = sum;
+            break;
+          case '/':
+            sum /= parseFloat(num);
+            opr = x !== '=' ? x:opr;
+            num = sum;
+            break;
+          case 'x':
+            sum *= parseFloat(num);
+            opr = x !== '=' ? x:opr;
+            num = sum;
+            break;
+          case '':
+            sum = parseFloat(num);
+            opr = x;
+            break;
+        }
+      }
+      document.getElementById("monitor").innerHTML = num;
+
+
+
+
+      lastInput = x
+    }
+  </script>
+
+</body>
+
+</html>

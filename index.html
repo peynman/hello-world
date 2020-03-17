@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div style="background-color:rgb(25, 14, 65);color:white;padding:20px;">
+        <form>
+            task name<br>
+            <input type="text" name="taskname" value="task1" id="taskid">
+            <input type="button" value="add" onclick="addnewtask()">
+            <br /> <input type="button" value="done" onclick="filterdone()">
+            <input type="button" value="undone"onclick="filterunndone()">
+            <input type="button" value="all"onclick="nofilter()">
+        </form>
+        <ul style="list-style-type:none;" id="list">
+            <!-- <li><input type="button" value="x" onclick="removetask(x)"><input type="checkbox">task1</li>
+           -->
+        </ul>
+    </div>
+
+    <script>
+        var tasklist = [];
+        function update(i) {
+            var calcstring = "";
+            if(i===1){
+
+            for (var x in tasklist) {
+                var html = '<li><input type="button" value="x" onclick="removetask(' + x + ')"><input type="checkbox" onchange="toggle('+x+')" '+(tasklist[x].isChecked? 'checked':'')+'>' + tasklist[x].text + '</li>';
+                calcstring = calcstring + html;
+
+            }}
+            if(i===2){
+                for(var x in tasklist){
+                    if(tasklist[x].isChecked){
+                        var html = '<li><input type="button" value="x" onclick="removetask(' + x + ')"><input type="checkbox" onchange="toggle('+x+')" '+(tasklist[x].isChecked? 'checked':'')+'>' + tasklist[x].text + '</li>';
+                calcstring = calcstring + html;  
+                    }
+
+                }
+            }
+            if(i==3){
+                for(var x in tasklist){
+                    if(!tasklist[x].isChecked){
+                        var html = '<li><input type="button" value="x" onclick="removetask(' + x + ')"><input type="checkbox" onchange="toggle('+x+')" '+(tasklist[x].isChecked? 'checked':'')+'>' + tasklist[x].text + '</li>';
+                calcstring = calcstring + html;     
+                    }
+                }
+            }
+
+
+            document.getElementById("list").innerHTML = calcstring;
+        }
+        function toggle(i){
+            tasklist[i].isChecked = !tasklist[i].isChecked;
+            
+        }
+        function addnewtask() {
+
+            tasklist.push({
+                text: document.getElementById("taskid").value,
+                isChecked: false,
+            })
+            update(1);
+        }
+        function removetask(i) {
+            tasklist.splice(i, 1);
+            update(1);
+        }
+        function filterdone(){
+                update(2);
+        }
+        function filterunndone(){
+            update(3);
+        }
+        function nofilter(){
+           update(1); 
+        }
+    </script>
+</body>
+
+</html>
